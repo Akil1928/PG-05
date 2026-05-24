@@ -15,7 +15,7 @@ public class Node<T> {
         this.next = this.next = null;
     }
 
-    //Constructor sobrecargado 2
+
     public Node(T data, Integer priority) {
         this.data = data;
         this.priority = priority;
