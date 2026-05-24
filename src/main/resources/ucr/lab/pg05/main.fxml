@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="760.0" prefWidth="1280.0"
+            styleClass="root-pane"
+            stylesheets="@styles.css"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.MainController">
+
+    <!-- ═══════ HEADER ═══════ -->
+    <top>
+        <VBox alignment="CENTER_LEFT" prefHeight="70.0" styleClass="header-bar" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="12.0" left="28.0" right="28.0" top="12.0"/>
+            </padding>
+            <children>
+                <HBox alignment="CENTER_LEFT" spacing="12.0">
+                    <children>
+                        <Label styleClass="header-badge" text="PG-05"/>
+                        <Label styleClass="header-title" text="Listas Enlazadas Circulares, Pilas y Colas en JavaFX">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <Label styleClass="header-sub"
+                       text="IF-3001 · Algoritmos y Estructuras de Datos | Prof. Lic. Gilberth Chaves Avila · Grupo 21">
+                    <font>
+                        <Font size="11.0"/>
+                    </font>
+                </Label>
+            </children>
+        </VBox>
+    </top>
+
+    <!-- ═══════ CENTER ═══════ -->
+    <center>
+        <TabPane fx:id="mainTabPane" styleClass="main-tabs" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <tabs>
+                <Tab text="Inicio">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="1000.0">
+                            <!-- Contenido de ejemplo: reemplaza por tus paneles reales -->
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Listas">
+                    <content>
+                        <AnchorPane prefHeight="600.0" prefWidth="1000.0"/>
+                    </content>
+                </Tab>
+                <Tab text="Pilas y Colas">
+                    <content>
+                        <AnchorPane prefHeight="600.0" prefWidth="1000.0"/>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
+
+</BorderPane>
