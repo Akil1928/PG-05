@@ -5,7 +5,6 @@ import ucr.lab.model.tree.Tree;
 import ucr.lab.model.tree.TreeException;
 import ucr.lab.utility.Equals;
 
-import java.util.Random;
 
 public class BTree<T extends Comparable<T>> implements Tree<T> {
     private BTreeNode<T> root;
@@ -55,10 +54,14 @@ public class BTree<T extends Comparable<T>> implements Tree<T> {
         if (node == null) {
             return false;
         }
-        if (Equals.equals(node.data, element)) {
+        int comparison = compareElements(element, node.data);
+        if (comparison == 0) { // Element found
             return true;
+        } else if (comparison < 0) { // Element is smaller, go left
+            return binarySearch(node.left, element);
+        } else { // Element is larger, go right
+            return binarySearch(node.right, element);
         }
-        return binarySearch(node.left, element) || binarySearch(node.right, element);
     }
 
     @Override
@@ -70,11 +73,13 @@ public class BTree<T extends Comparable<T>> implements Tree<T> {
         if (node == null) {
             node = new BTreeNode<>(element, path);
         } else {
-            int value = new Random().nextInt(10);
-            if (value % 2 == 0)
+            int comparison = compareElements(element, node.data);
+            if (comparison < 0) { // Element is smaller, go left
                 node.left = add(node.left, element, path + "/left");
-            else
+            } else if (comparison > 0) { // Element is larger, go right
                 node.right = add(node.right, element, path + "/right");
+            }
+            // If comparison == 0, element is equal, do nothing (no duplicates added)
         }
         return node;
     }
@@ -90,37 +95,27 @@ public class BTree<T extends Comparable<T>> implements Tree<T> {
     private BTreeNode<T> remove(BTreeNode<T> node, T element) {
         if (node == null) return null;
 
-        if (Equals.equals(node.data, element)) {
-            if (node.left == null && node.right == null) {
-                return null;
-            } else if (node.left == null) {
+        int comparison = compareElements(element, node.data);
+
+        if (comparison < 0) { // Element is smaller, go left
+            node.left = remove(node.left, element);
+        } else if (comparison > 0) { // Element is larger, go right
+            node.right = remove(node.right, element);
+        } else { // Element found (comparison == 0)
+            // Case 1: No child or one child
+            if (node.left == null) {
                 return node.right;
             } else if (node.right == null) {
                 return node.left;
-            } else {
-                T replacementValue = getMin(node.right);
-                node.data = replacementValue;
-                node.right = remove(node.right, replacementValue);
             }
-        } else {
-            node.left = remove(node.left, element);
-            node.right = remove(node.right, element);
-        }
 
+            // Case 2: Two children
+            // Find the in-order successor (smallest in the right subtree)
+            node.data = getMin(node.right);
+            // Delete the in-order successor
+            node.right = remove(node.right, node.data);
+        }
         return node;
-    }
-
-    private T getMin(BTreeNode<T> node) {
-        T min = node.data;
-        if (node.left != null) {
-            T leftMin = getMin(node.left);
-            if (leftMin.compareTo(min) < 0) min = leftMin;
-        }
-        if (node.right != null) {
-            T rightMin = getMin(node.right);
-            if (rightMin.compareTo(min) < 0) min = rightMin;
-        }
-        return min;
     }
 
     @Override
@@ -128,17 +123,21 @@ public class BTree<T extends Comparable<T>> implements Tree<T> {
         if (isEmpty()) {
             throw new ucr.lab.model.tree.TreeException("Binary Tree is empty");
         }
-        int h = height(root, element, 0);
+        int h = height(root, element, 1); // Start depth at 1 for "number of nodes" height
         if (h == -1) throw new ucr.lab.model.tree.TreeException("Element not found in tree");
         return h;
     }
 
     private int height(BTreeNode<T> node, T element, int depth) {
         if (node == null) return -1;
-        if (Equals.equals(node.data, element)) return depth;
-        int leftHeight = height(node.left, element, depth + 1);
-        if (leftHeight != -1) return leftHeight;
-        return height(node.right, element, depth + 1);
+        int comparison = compareElements(element, node.data);
+        if (comparison == 0) {
+            return depth;
+        } else if (comparison < 0) {
+            return height(node.left, element, depth + 1);
+        } else {
+            return height(node.right, element, depth + 1);
+        }
     }
 
     @Override
@@ -146,7 +145,7 @@ public class BTree<T extends Comparable<T>> implements Tree<T> {
         if (isEmpty()) {
             throw new ucr.lab.model.tree.TreeException("Binary Tree is empty");
         }
-        return height(root) - 1;
+        return height(root); // Changed to return height(root) directly
     }
 
     private int height(BTreeNode<T> node) {
@@ -162,6 +161,13 @@ public class BTree<T extends Comparable<T>> implements Tree<T> {
         return getMin(root);
     }
 
+    private T getMin(BTreeNode<T> node) {
+        if (node.left == null) {
+            return node.data;
+        }
+        return getMin(node.left);
+    }
+
     @Override
     public T max() throws ucr.lab.model.tree.TreeException {
         if (isEmpty()) {
@@ -171,16 +177,10 @@ public class BTree<T extends Comparable<T>> implements Tree<T> {
     }
 
     private T getMax(BTreeNode<T> node) {
-        T max = node.data;
-        if (node.left != null) {
-            T leftMax = getMax(node.left);
-            if (leftMax.compareTo(max) > 0) max = leftMax;
+        if (node.right == null) {
+            return node.data;
         }
-        if (node.right != null) {
-            T rightMax = getMax(node.right);
-            if (rightMax.compareTo(max) > 0) max = rightMax;
-        }
-        return max;
+        return getMax(node.right);
     }
 
     @Override
@@ -248,7 +248,7 @@ public class BTree<T extends Comparable<T>> implements Tree<T> {
     private String nodeHeight(BTreeNode<T> node) {
         String result = "";
         if (node != null) {
-            result += node.data + ":" + (height(node) - 1) + " ";
+            result += node.data + ":" + (height(node) - 1) + " "; // This will now be "height as nodes - 1"
             result += nodeHeight(node.left);
             result += nodeHeight(node.right);
         }
@@ -267,5 +267,15 @@ public class BTree<T extends Comparable<T>> implements Tree<T> {
             return e.getMessage();
         }
         return result;
+    }
+
+   // ========================= ayuda ==========================
+    private boolean equals (T a, T b){
+        return  a== null ? b == null: a.equals(b);
+    }
+
+    //metodo genercico de comparacion
+    private int compareElements(T a, T b){
+        return a.compareTo(b);
     }
 }
