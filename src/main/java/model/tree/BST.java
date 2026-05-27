@@ -18,7 +18,7 @@ public class BST<T extends Comparable<T>> extends BTree<T>{
     public void add(T element) {
         this.root = add(root,element);
 
-    }
+    }//a
     private BTreeNode<T> add(BTreeNode<T> node, T element){
         if(node == null){
             node = new BTreeNode<>(element);
