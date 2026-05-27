@@ -2,11 +2,7 @@ package model.tree;
 
 import java.util.Random;
 
-/**
- * Implementación de un árbol binario no ordenado (inserción aleatoria).
- * Se asume que la clase BTreeNode<T> existe en el paquete y expone
- * los campos: T data; BTreeNode<T> left; BTreeNode<T> right; String path;
- */
+
 public class BTree<T extends Comparable<T>> implements Tree<T> {
     private BTreeNode<T> root; // representa la única entrada al árbol
 
@@ -293,7 +289,7 @@ public class BTree<T extends Comparable<T>> implements Tree<T> {
     }
 
     // Método genérico de comparación
-    private int compareElements(T a, T b) {
+    public int compareElements(T a, T b) {
         return a.compareTo(b);
     }
 }
