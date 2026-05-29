@@ -446,3 +446,188 @@
 .btn-green:disabled {
     -fx-opacity: 0.5;
 }
+/* ══════════════════════════════════════════════════════════════════════════
+   PG-05 · Árboles Binarios · IF3001 UCR
+   Estilos adicionales para la interfaz de árboles con tema oscuro en Canvas
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Panel lateral izquierdo (controles) ────────────────────────────────── */
+.side-panel {
+    -fx-background-color: #0d1117;
+    -fx-border-color: #21262d;
+    -fx-border-width: 0 1 0 0;
+    -fx-min-width: 200px;
+}
+.side-panel .label {
+    -fx-text-fill: #c9d1d9;
+    -fx-font-size: 12px;
+}
+.side-panel .text-field {
+    -fx-background-color: #161b22;
+    -fx-text-fill: #c9d1d9;
+    -fx-border-color: #30363d;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-font-size: 12px;
+    -fx-padding: 6 8 6 8;
+}
+.side-panel .text-field:focused {
+    -fx-border-color: #58a6ff;
+}
+.side-panel .separator .line {
+    -fx-border-color: #21262d;
+}
+.side-panel .combo-box {
+    -fx-background-color: #161b22;
+    -fx-border-color: #30363d;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-text-fill: #c9d1d9;
+}
+.side-panel .combo-box .list-cell {
+    -fx-background-color: #161b22;
+    -fx-text-fill: #c9d1d9;
+}
+.side-panel .combo-box-popup .list-view {
+    -fx-background-color: #161b22;
+    -fx-border-color: #30363d;
+}
+.side-panel .combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: #21262d;
+}
+
+/* ── Títulos del panel ───────────────────────────────────────────────────── */
+.panel-title {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #58a6ff;
+}
+.panel-sub {
+    -fx-font-size: 10px;
+    -fx-text-fill: #8b949e;
+    -fx-font-style: italic;
+}
+
+/* ── Botones de acción ───────────────────────────────────────────────────── */
+.btn-insert {
+    -fx-background-color: #1f6feb;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-padding: 7 12 7 12;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+.btn-insert:hover { -fx-background-color: #388bfd; }
+
+.btn-search {
+    -fx-background-color: #6e40c9;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-padding: 7 12 7 12;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+.btn-search:hover { -fx-background-color: #8957e5; }
+
+.btn-remove {
+    -fx-background-color: #da3633;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-padding: 7 12 7 12;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+.btn-remove:hover { -fx-background-color: #f85149; }
+
+.btn-clear {
+    -fx-background-color: #21262d;
+    -fx-text-fill: #8b949e;
+    -fx-font-size: 11px;
+    -fx-padding: 5 10 5 10;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+    -fx-border-color: #30363d;
+    -fx-border-radius: 5;
+}
+.btn-clear:hover { -fx-background-color: #30363d; -fx-text-fill: #c9d1d9; }
+
+.btn-run {
+    -fx-background-color: #238636;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-padding: 6 12 6 12;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+    -fx-min-width: 36px;
+}
+.btn-run:hover { -fx-background-color: #2ea043; }
+
+/* ── Área de salida (recorridos) ────────────────────────────────────────── */
+.output-area {
+    -fx-control-inner-background: #0d1117;
+    -fx-background-color: #0d1117;
+    -fx-text-fill: #58a6ff;
+    -fx-border-color: #21262d;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-font-family: "Consolas", "Courier New", monospace;
+    -fx-font-size: 11px;
+    -fx-padding: 6;
+}
+
+/* ── Stats y status ─────────────────────────────────────────────────────── */
+.stats-label {
+    -fx-font-size: 11px;
+    -fx-text-fill: #8b949e;
+    -fx-font-style: italic;
+}
+.status-label {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-wrap-text: true;
+}
+.rotation-label {
+    -fx-font-size: 11px;
+    -fx-text-fill: #e3b341;
+    -fx-background-color: #161b22;
+    -fx-padding: 4 8 4 8;
+    -fx-background-radius: 4;
+    -fx-wrap-text: true;
+}
+
+/* ── ScrollPane del canvas ──────────────────────────────────────────────── */
+.canvas-scroll {
+    -fx-background: #0d1117;
+    -fx-background-color: #0d1117;
+    -fx-border-color: transparent;
+}
+.canvas-scroll > .viewport {
+    -fx-background-color: #0d1117;
+}
+.canvas-scroll .scroll-bar:vertical .thumb,
+.canvas-scroll .scroll-bar:horizontal .thumb {
+    -fx-background-color: #30363d;
+    -fx-background-radius: 4;
+}
+.canvas-scroll .scroll-bar .track {
+    -fx-background-color: #161b22;
+}
+
+/* ── Leyenda – puntos de color ─────────────────────────────────────────── */
+.dot-root       { -fx-text-fill: #00bcd4; -fx-font-size: 16px; }
+.dot-leaf       { -fx-text-fill: #26a64f; -fx-font-size: 16px; }
+.dot-internal   { -fx-text-fill: #2d4a6e; -fx-font-size: 16px; }
+.dot-search     { -fx-text-fill: #7b2d8b; -fx-font-size: 16px; }
+.dot-found      { -fx-text-fill: #e6b800; -fx-font-size: 16px; }
+.dot-unbalanced { -fx-text-fill: #d32f2f; -fx-font-size: 16px; }
+
+/* ── Legend title ────────────────────────────────────────────────────────── */
+.legend-title {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #8b949e;
+}

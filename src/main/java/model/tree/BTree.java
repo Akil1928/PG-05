@@ -4,7 +4,7 @@ import java.util.Random;
 
 
 public class BTree<T extends Comparable<T>> implements Tree<T> {
-    private BTreeNode<T> root; // representa la única entrada al árbol
+    public BTreeNode<T> root; // representa la única entrada al árbol
 
     // Constructor
     public BTree() {
@@ -145,7 +145,7 @@ public class BTree<T extends Comparable<T>> implements Tree<T> {
     }
 
     // Altura en nodos (hoja = 1)
-    private int height(BTreeNode<T> node) {
+    public int height(BTreeNode<T> node) {
         if (node == null) return 0;
         return 1 + Math.max(height(node.left), height(node.right));
     }
@@ -218,7 +218,7 @@ public class BTree<T extends Comparable<T>> implements Tree<T> {
     private String preOrder(BTreeNode<T> node) {
         String result = "";
         if (node != null) {
-            result = node.data + "(" + node.path + ") ";
+            result = node.data + ", ";
             result += preOrder(node.left);
             result += preOrder(node.right);
         }
@@ -284,7 +284,7 @@ public class BTree<T extends Comparable<T>> implements Tree<T> {
         return result;
     }
 
-    private boolean equals(T a, T b) {
+    public boolean equals(T a, T b) {
         return a == null ? b == null : a.equals(b);
     }
 
